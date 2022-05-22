@@ -208,6 +208,129 @@ Pacu > aws s3 sync s3://glitchcloud s3-files-dir
 /proc/[1..20]/environ
  ```
  
+
+ 
+ # AZURE
+
+* Check if company is using Azure AD:
+```
+https://login.microsoftonline.com/getuserrealm.srf?login=username@COMPANY.onmicrosoft.com&xml=1
+- If NameSpaceType is "Managed", the company uses Azure AD
+```
+
+* Auth methods:
+  * Password Hash Synchronization
+     * Azure AD Connect
+     * On-prem service synchronizes hashed user credentials to Azure
+     * User can authenticate directly to Azure services like O365 with their internal domain credential
+  * Pass Through Authentication
+     *  Credentials stored only on-prem
+     * On-prem agent validates authentication requests to Azure AD
+     * Allows SSO to other Azure apps without creds stored in cloud
+  * Active Directory Federation Services (ADFS)
+     * Credentials stored only on-prem
+     * Federated trust is setup between Azure and on-prem AD to validate auth requests to the cloud
+     * For password attacks you would have to auth to the on-prem ADFS portal instead of Azure endpoints
+  * Certificate-based auth
+     * Client certs for authentication to API
+     * Certificate management in legacy Azure Service Management (ASM) makes it impossible to know who created a cert (persistence potential)
+  * Conditional access policies
+  * Long-term access tokens
+     * Authentication to Azure with oAuth tokens
+     * Desktop CLI tools that can be used to auth store access tokens on disk
+  * Legacy authentication portals
+
+### Recon:
+* O365 Usage
+   * https://login.microsoftonline.com/getuserrealm.srf?login=username@acmecomputercompany.com&xml=1
+   * https://outlook.office365.com/autodiscover/autodiscover.json/v1.0/test@targetdomain.com?Protocol=Autodiscoverv1
+* User enumeration on Azure can be performed at
+   * Detect invalid users while password spraying with:
+      * https://github.com/dafthack/MSOLSpray
+   * For on-prem OWA/EWS you can enumerate users with timing attacks (MailSniper)
+
+
+* Microsoft Azure Storage:
+  * Microsoft Azure Storage is like Amazon S3
+  * Blob storage is for unstructured data
+  * Containers and blobs can be publicly accessible via access policies
+  * Predictable URL’s at core.windows.net
+     * storage-account-name.blob.core.windows.net
+     * storage-account-name.file.core.windows.net
+     * storage-account-name.table.core.windows.net
+     * storage-account-name.queue.core.windows.net
+  * The “Blob” access policy means anyone can anonymously read blobs, but can’t list the blobs in the container
+  * The “Container” access policy allows for listing containers and blobs
+  * Microburst https://github.com/NetSPI/MicroBurst
+
+
+* Password Attacks
+  * Password Spraying Microsoft Online (Azure/O365)
+  ```
+  POST /common/oauth2/token HTTP/1.1
+  Accept: application/json
+  Content-Type: application/x-www-form-urlencoded
+  Host: login.microsoftonline.com
+  Content-Length: 195
+  Expect: 100-continue
+  Connection: close
+
+  resource=https%3A%2F%2Fgraph.windows.net&client_id=1b730954-1685-4b74-9bfd-
+  dac224a7b894&client_info=1&grant_type=password&username=user%40targetdomain.com&passwor
+  d=Winter2020&scope=openid
+  ```
+
+* Password protections & Smart Lockout
+  * https://github.com/ustayready/fireprox
+
+
+* Interesting metadata instance urls:
+```
+http://169.254.169.254/metadata/v1/maintenance
+http://169.254.169.254/metadata/instance?api-version=2017-04-02
+http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/publicIpAddress?api-version=2017-04-02&format=text
+```
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ### Basic Azure AD concepts and tips
+   * Source of authentication for Office 365, Azure Resource Manager, and anything else you integrate with it.
+
+* Azure AD principals
+   * Users
+   * Devices
+   * Applications
+
+* Azure AD roles
+  * RBAC Roles are only used for Azure Resource Manager
+  * Office 365 uses administrator roles exclusively
+
+
+
+* Azure AD applications
+    * Microsoft Graph
+
+    
+### Azure Block Blobs (S3 equivalent) attacks
+``` 
+* Discovering with Google Dorks
+site:*.blob.core.windows.net
+site:*.blob.core.windows.net ext:xlsx | ext:csv "password"
+* Discovering with Dns enumeration
+python dnscan.py -d blob.core.windows.net -w subdomains-100.txt
+```
+ 
+ 
+ 
+ 
+ 
  
 ## Cloud Labs
 ### AWS Labs 
@@ -221,8 +344,5 @@ Pacu > aws s3 sync s3://glitchcloud s3-files-dir
 * https://github.com/azurecitadel/azure-security-lab
  
  
- # AZURE
- 
-
 ### refrences
 * [SEC588: Cloud Penetration Testing](https://www.sans.org/cyber-security-courses/cloud-penetration-testing/)
