@@ -209,6 +209,17 @@ Pacu > aws s3 sync s3://glitchcloud s3-files-dir
  ```
  
  
+## Cloud Labs
+### AWS Labs 
+* https://github.com/OWASP/Serverless-Goat 
+* https://github.com/RhinoSecurityLabs/cloudgoat 
+* https://github.com/appsecco/attacking-cloudgoat2 
+* https://github.com/OWASP/DVSA 
+### GCP Labs 
+* http://thunder-ctf.cloud/ https://gcpgoat.joshuajebaraj.com/
+### Azure Labs 
+* https://github.com/azurecitadel/azure-security-lab
+ 
  
  # AZURE
  
