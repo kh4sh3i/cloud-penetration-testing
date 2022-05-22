@@ -1,7 +1,9 @@
 # cloud penetration testing
 A curateinfrastrucd list of cloud pentesting resource, contains AWS, Azure, Google Cloud
 
-## General
+
+# AWS
+## AWS basic info
 * mapping workflow
   * infrastructure mapping
   * service / container mapping
@@ -21,29 +23,17 @@ A curateinfrastrucd list of cloud pentesting resource, contains AWS, Azure, Goog
   ```
 
  * amazon IAM
-  * amazon identify and access management service
-  * RBAC = role base access control
-  * ABAC = Atribute base acces controll
-  * IAM has user versioning : V1,V2,...
+   * amazon identify and access management service
+   * RBAC = role base access control
+   * ABAC = Atribute base acces controll
+   * IAM has user versioning : V1,V2,...
 
 * KMS 
- * key managment service
- * is not ephemeral like access key id and secret key id in IAM
- * use for data encrypt/decrypt S3
+  * key managment service
+  * is not ephemeral like access key id and secret key id in IAM
+  * use for data encrypt/decrypt S3
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- ## AWS basic info
  ### Auth methods:
 * Programmatic access - Access + Secret Key
    * Secret Access Key and Access Key ID for authenticating via scripts and CLI
@@ -145,17 +135,83 @@ http://169.254.169.254/latest/dynamic/instance-identity/document
  
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ ### Find subdomains
+ ```
+assetfinder example.com
+```
+* Bruteforcing
+```
+python3 dnsrecon.py -d example.com -D subdomains-top1mil-5000.txt -t brt
+```
+
+* https://github.com/RhinoSecurityLabs/pacu
+```
+bash install.sh
+python3 pacu.py
+import_keys --all
+ls
+```
+
+* AWS Bloodhound
+  * https://github.com/lyft/cartography
 
 
+ ### S3 attack
+ 
+ * S3 Bucket Pillaging
+  * GOAL: Locate Amazon S3 buckets and search them for interesting data
+  * In this lab you will attempt to identify a publicly accessible S3 bucket hosted by an organization. After identifying it you will list out the contents of it and download the files hosted there.
+```
+~$ sudo apt-get install python3-pip
+~$ git clone https://github.com/RhinoSecurityLabs/pacu
+~$ cd pacu
+~$ sudo bash install.sh
+~$ sudo aws configure
+~$ sudo python3 pacu.py
+
+Pacu > import_keys --all
+# Search by domain
+Pacu > run s3__bucket_finder -d glitchcloud 
+# List files in bucket
+Pacu > aws s3 ls s3://glitchcloud
+# Download files
+Pacu > aws s3 sync s3://glitchcloud s3-files-dir
+```
+* S3 Code Injection
+ * Backdoor JavaScript in S3 Buckets used by webapps 
+ * In March, 2018 a crypto-miner malware was found to be loading on MSN’s homepage
+ * This was due to AOL’s advertising platform having a writeable S3 bucket, which was being served by MSN
+ * If a webapp is loading content from an S3 bucket made publicly writeable attackers can upload  malicious JS to get executed by visitors 
+ * Can perform XSS-type attacks against webapp visitors
+ * Hook browser with Beef
+
+* Domain Hijacking
+  * Hijack S3 domain by finding references in a webapp to S3 buckets that don’t exist anymore
+  * Or… subdomains that were linked to an S3 bucket with CNAME’s that still exist
+  * When assessing webapps look for 404’s to *.s3.amazonaws.com
+  * When brute forcing subdomains for an org look for 404’s with ‘NoSuchBucket’ error 
+  * Go create the S3 bucket with the same name and region 
+  * Load malicious content to the new S3 bucket that will be executed when visitors hit the site
+ 
+ ### AWS lambda
+   * Welcome to serverless!!!!
+   * AWS Lambda, essentially are short lived servers that run your function and provide you with output that can be then used in other applications or consumed by other endpoints.
+
+* OS command Injection in Lambda
+  * curl "https://API-endpoint/api/stringhere"
+
+* For a md5 converter endpoint "https://API-endpoint/api/hello;id;w;cat%20%2fetc%2fpasswd"
+* Steal creds via XXE or SSRF reading:
+``` 
+/proc/self/environ
+# If blocked try to read other vars:
+/proc/[1..20]/environ
+ ```
+ 
+ 
+ 
+ # AZURE
+ 
 
 ### refrences
 * [SEC588: Cloud Penetration Testing](https://www.sans.org/cyber-security-courses/cloud-penetration-testing/)
