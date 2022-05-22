@@ -249,7 +249,6 @@ https://login.microsoftonline.com/getuserrealm.srf?login=username@COMPANY.onmicr
       * https://github.com/dafthack/MSOLSpray
    * For on-prem OWA/EWS you can enumerate users with timing attacks (MailSniper)
 
-
 * Microsoft Azure Storage:
   * Microsoft Azure Storage is like Amazon S3
   * Blob storage is for unstructured data
@@ -265,24 +264,22 @@ https://login.microsoftonline.com/getuserrealm.srf?login=username@COMPANY.onmicr
 
 
 * Password Attacks
-  * Password Spraying Microsoft Online (Azure/O365)
-  ```
-  POST /common/oauth2/token HTTP/1.1
-  Accept: application/json
-  Content-Type: application/x-www-form-urlencoded
-  Host: login.microsoftonline.com
-  Content-Length: 195
-  Expect: 100-continue
-  Connection: close
+   * Password Spraying Microsoft Online (Azure/O365)
+   ```
+   POST /common/oauth2/token HTTP/1.1
+   Accept: application/json
+   Content-Type: application/x-www-form-urlencoded
+   Host: login.microsoftonline.com
+   Content-Length: 195
+   Expect: 100-continue
+   Connection: close
 
-  resource=https%3A%2F%2Fgraph.windows.net&client_id=1b730954-1685-4b74-9bfd-
-  dac224a7b894&client_info=1&grant_type=password&username=user%40targetdomain.com&passwor
-  d=Winter2020&scope=openid
-  ```
-
-* Password protections & Smart Lockout
-  * https://github.com/ustayready/fireprox
-
+   resource=https%3A%2F%2Fgraph.windows.net&client_id=1b730954-1685-4b74-9bfd-
+   dac224a7b894&client_info=1&grant_type=password&username=user%40targetdomain.com&passwor
+   d=Winter2020&scope=openid
+   ```
+  * Password protections & Smart Lockout
+    * https://github.com/ustayready/fireprox
 
 * Interesting metadata instance urls:
 ```
@@ -293,56 +290,41 @@ http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/pu
  
  
  
- 
- 
- 
- 
- 
- 
- 
- ### Basic Azure AD concepts and tips
+### Basic Azure AD concepts and tips
    * Source of authentication for Office 365, Azure Resource Manager, and anything else you integrate with it.
-
-* Azure AD principals
-   * Users
-   * Devices
-   * Applications
-
-* Azure AD roles
-  * RBAC Roles are only used for Azure Resource Manager
-  * Office 365 uses administrator roles exclusively
-
-
-
-* Azure AD applications
-    * Microsoft Graph
+   * Azure AD principals
+      * Users
+      * Devices
+      * Applications
+   * Azure AD roles
+     * RBAC Roles are only used for Azure Resource Manager
+     * Office 365 uses administrator roles exclusively
+   * Azure AD applications
+       * Microsoft Graph
 
     
 ### Azure Block Blobs (S3 equivalent) attacks
-``` 
-* Discovering with Google Dorks
-site:*.blob.core.windows.net
-site:*.blob.core.windows.net ext:xlsx | ext:csv "password"
-* Discovering with Dns enumeration
-python dnscan.py -d blob.core.windows.net -w subdomains-100.txt
+   ``` 
+   * Discovering with Google Dorks
+   site:*.blob.core.windows.net
+   site:*.blob.core.windows.net ext:xlsx | ext:csv "password"
+   * Discovering with Dns enumeration
+   python dnscan.py -d blob.core.windows.net -w subdomains-100.txt
 ```
+
+ 
+### Cloud Labs
+* AWS Labs 
+   * https://github.com/OWASP/Serverless-Goat 
+   * https://github.com/RhinoSecurityLabs/cloudgoat 
+   * https://github.com/appsecco/attacking-cloudgoat2 
+   * https://github.com/OWASP/DVSA 
+* GCP Labs 
+  * http://thunder-ctf.cloud/ https://gcpgoat.joshuajebaraj.com/
+* Azure Labs 
+   * https://github.com/azurecitadel/azure-security-lab
  
  
- 
- 
- 
- 
-## Cloud Labs
-### AWS Labs 
-* https://github.com/OWASP/Serverless-Goat 
-* https://github.com/RhinoSecurityLabs/cloudgoat 
-* https://github.com/appsecco/attacking-cloudgoat2 
-* https://github.com/OWASP/DVSA 
-### GCP Labs 
-* http://thunder-ctf.cloud/ https://gcpgoat.joshuajebaraj.com/
-### Azure Labs 
-* https://github.com/azurecitadel/azure-security-lab
- 
- 
-### refrences
+#### refrences
 * [SEC588: Cloud Penetration Testing](https://www.sans.org/cyber-security-courses/cloud-penetration-testing/)
+* [cloud pentest](https://pentestbook.six2dez.com/enumeration/cloud/azure)
