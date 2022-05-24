@@ -351,7 +351,19 @@ http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/pu
  ### [Microsoft Graph](https://www.postman.com/microsoftgraph/workspace/microsoft-graph/overview)
 with call azure api we can manage all message of exchange and sharepoint
  
- 
+ ### important Tips from course sans 588
+ <img src="./img/0.png" width="700px" />
+  <img src="./img/1.png" width="700px" />
+    <img src="./img/2.png" width="700px" />
+      <img src="./img/3.png" width="700px" />
+        <img src="./img/4.png" width="700px" />
+          <img src="./img/5.png" width="700px" />
+            <img src="./img/6.png" width="700px" />
+              <img src="./img/7.png" width="700px" />
+                <img src="./img/8.png" width="700px" />
+                  <img src="./img/9.png" width="700px" />
+                    <img src="./img/10.png" width="700px" />
+                      <img src="./img/11.png" width="700px" />
  
  
 #### refrences
