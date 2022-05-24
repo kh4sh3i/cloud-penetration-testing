@@ -303,6 +303,37 @@ http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/pu
    * https://github.com/azurecitadel/azure-security-lab
  
  
+ 
+ 
+ 
+ 
+ ### CDN - Comain Fronting
+* [FindFrontableDomains](https://github.com/rvrsh3ll/FindFrontableDomains)
+* [Noctilucent](https://github.com/SixGenInc/Noctilucent)
+
+
+
+
+## Docker Container
+* Stateful instance of an image with a writable layer
+* Contains everything needed to run your application
+
+ 
+## Kubernetes
+* Kubernetes is a security orchestrator
+* Kubernetes master provides an API to interact with nodes
+* Each Kubernetes node run kubelet to interact with API and kube-proxy to refect Kubernetes networking services on each node.
+* Kubernetes objects are abstractions of states of your system.
+* Pods: collection of container share a network and namespace in the same node.
+* Services: Group of pods running in the cluster.
+* Volumes: directory accesible to all containers in a pod. Solves the problem of loose info when container crash and restart.
+* Namespaces: scope of Kubernetes objects, like a workspace (dev-space). 
+ 
+ 
+ 
+ 
+ 
+ 
 #### refrences
 * [SEC588: Cloud Penetration Testing](https://www.sans.org/cyber-security-courses/cloud-penetration-testing/)
-* [cloud pentest](https://pentestbook.six2dez.com/enumeration/cloud/azure)
+* [cloud pentest](https://pentestbook.six2dez.com/enumeration/cloud/)
