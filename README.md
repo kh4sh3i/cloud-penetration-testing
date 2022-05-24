@@ -312,9 +312,28 @@ http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/pu
 * [Noctilucent](https://github.com/SixGenInc/Noctilucent)
 
 
+### Golden SAML attack
+* azure work with SAML, if we can 
+* SAML : security assertion markup language, use with XML and SSO login page, like office365
+* azure AD support 70 pre-define RBAC
+* ADFS is a SAML Idp with Active Directory
+* [shimit](https://github.com/cyberark/shimit) : A tool that implements the Golden SAML attack
+
+### Azure Tips
+* azure vms like aws EC2 for computing
+* azure serverless function calls "azure function", we can attack with owasp top 10 to native cloud.
+* we can eecute script like python,bash,powershell for hacking azure! 
+   * install customscript tools in extention section of VM azure
+   * code execution on azure
+* indows container there is no GUI, with install mimikatz on this container and loaded we can lateralmovement!
 
 
-## Docker Container
+### cloud native 
+
+
+
+
+## Docker Containerole 
 * Stateful instance of an image with a writable layer
 * Contains everything needed to run your application
 
@@ -329,7 +348,8 @@ http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/pu
 * Volumes: directory accesible to all containers in a pod. Solves the problem of loose info when container crash and restart.
 * Namespaces: scope of Kubernetes objects, like a workspace (dev-space). 
  
- 
+ ### [Microsoft Graph](https://www.postman.com/microsoftgraph/workspace/microsoft-graph/overview)
+with call azure api we can manage all message of exchange and sharepoint
  
  
  
